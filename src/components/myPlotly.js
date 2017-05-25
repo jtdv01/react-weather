@@ -9,19 +9,29 @@ class MyPlotly extends Component {
     render() {
 
         const weatherData = this.props.weatherData;
-        const dateTimes = _.map(weatherData, i => i.dateTime );
-        const temps = _.map(weatherData, i => i.temp );
-
+        const dateTimes = _.map(weatherData, i => i.dateTime);
+        const tempsMax = _.map(weatherData, i => i.tempsMax);
+        const tempsMin = _.map(weatherData, i => i.tempsMin);
 
         let data = [
-        {
-            type: 'line',  // all "scatter" attributes: https://plot.ly/javascript/reference/#scatter
-            x: dateTimes,     // more about "x": #scatter-x
-            y: temps,     // #scatter-y
-            marker: {         // marker is an object, valid marker keys: #scatter-marker
-                color: 'rgb(16, 32, 77)' // more about "marker.color": #scatter-marker-color
+            {
+                type: 'line',  // all "scatter" attributes: https://plot.ly/javascript/reference/#scatter
+                x: dateTimes,     // more about "x": #scatter-x
+                y: tempsMax,     // #scatter-y
+                name: "Max temp",
+                marker: {         // marker is an object, valid marker keys: #scatter-marker
+                    color: 'rgb(100, 32, 77)' // more about "marker.color": #scatter-marker-color
+                }
+            },
+            {
+                type: 'line',  // all "scatter" attributes: https://plot.ly/javascript/reference/#scatter
+                x: dateTimes,     // more about "x": #scatter-x
+                y: tempsMin,     // #scatter-y
+                name: "Min temp",
+                marker: {         // marker is an object, valid marker keys: #scatter-marker
+                    color: 'rgb(16, 32, 77)' // more about "marker.color": #scatter-marker-color
+                }
             }
-        }
         ];
 
         let layout = {                     // all "layout" attributes: #layout

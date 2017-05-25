@@ -2,7 +2,11 @@ import { FETCH_WEATHER, SET_CITY } from '../actions';
 import { combineReducers } from 'redux'
 
 const initialState = {
-    weather: {},
+    weather: {
+        daily: {
+            data: '123'
+        }
+    },
     city: 'Sydney'
 };
 

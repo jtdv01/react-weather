@@ -34,19 +34,17 @@ class Home extends Component{
         this.props.fetchWeatherAsync(this.props.city);
     }
     render(){
-        const weatherData = _.map(this.props.weather.list, 
+        const weatherData = _.map(this.props.weather['daily']['data'], 
             (i) => {
-                const dateTime = Moment.unix(i.dt).format("MMMM Do YYYY, h:mm:ss a");
-                const temp = i.main.temp;
-                const temp_min = i.main.temp_min;
-                const temp_max = i.main.temp_max;
+                const dateTime = Moment.unix(i['time']).format("MMMM Do YYYY, h:mm:ss a");
+                const tempsMin = i['temperatureMin'];
+                const tempsMax = i['temperatureMax'];
                 const img = getCityImage(this.props.city);
 
                 return {
                     dateTime,
-                    temp,
-                    temp_min,
-                    temp_max,
+                    tempsMin,
+                    tempsMax,
                     img
                 }
 
