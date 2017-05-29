@@ -3,8 +3,22 @@ import { combineReducers } from 'redux'
 
 const initialState = {
     weather: {
-        daily: {
-            data: '123'
+        query:{
+            results: {
+                channel: {
+                    location:{
+                        city:'',
+                        region:'',
+                        country:''
+                    },
+                    item:{
+                        condition:{
+                            xx:1
+                        },
+                        forecast: [1,2,3]
+                    }
+                }
+            }
         }
     },
     city: 'Sydney'

@@ -2,16 +2,19 @@ import React, { Component } from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { compose, bindActionCreators }from 'redux';
-import { fetchWeatherAsync, setCity } from '../actions';
+import { fetchWeatherAsyncWithYahoo, setCity } from '../actions';
 import { connect } from 'react-redux';
 
 class CitySearch extends Component {
-    state = {
-        city: 'Sydney',
-        dataSource: ['Sydney', 'Melbourne', 'Brisbane', 'Adelaide', 'Perth']
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            city: 'Sydney',
+            dataSource: ['Sydney', 'Melbourne', 'Brisbane', 'Adelaide', 'Perth']
+        };
+    }
 
-    handleUpdateInput = (city) => {
+    handleUpdateInput(city){
         this.setState({city});
         
         // TODO: add previous value
@@ -22,27 +25,29 @@ class CitySearch extends Component {
         // });
     };
 
-    handleClose = () => {
+    handleClose(){
         this.props.setCity(this.state.city);
-        this.props.fetchWeatherAsync(this.state.city);
+        this.props.fetchWeatherAsyncWithYahoo(this.state.city);
     }
 
     render() {
-    return (
-        <MuiThemeProvider>
-            <AutoComplete
-                hintText="Search for a city"
-                dataSource={this.state.dataSource}
-                onUpdateInput={this.handleUpdateInput}
-                onClose={this.handleClose}
-            />
-        </MuiThemeProvider>
-    );
+        return (
+            <div className="container container-fluid">
+            <MuiThemeProvider>
+                <AutoComplete
+                    hintText="Search for a city"
+                    dataSource={this.state.dataSource}
+                    onUpdateInput={this.handleUpdateInput.bind(this)}
+                    onClose={this.handleClose.bind(this)}
+                />
+            </MuiThemeProvider>
+            </div>
+        );
     }
 }
 
 const mapDispatchToProps = (dispatch) =>{
-    return bindActionCreators({ fetchWeatherAsync, setCity }, dispatch);
+    return bindActionCreators({ fetchWeatherAsyncWithYahoo, setCity }, dispatch);
 }
 const mapStateToProps = ({ weather, city }) =>{
     return {

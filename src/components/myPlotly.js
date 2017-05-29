@@ -12,6 +12,7 @@ class MyPlotly extends Component {
         const dateTimes = _.map(weatherData, i => i.dateTime);
         const tempsMax = _.map(weatherData, i => i.tempsMax);
         const tempsMin = _.map(weatherData, i => i.tempsMin);
+        const text = _.map(weatherData, i => i.text);
 
         let data = [
             {
@@ -19,8 +20,9 @@ class MyPlotly extends Component {
                 x: dateTimes,     // more about "x": #scatter-x
                 y: tempsMax,     // #scatter-y
                 name: "Max temp",
+                text: text ,
                 marker: {         // marker is an object, valid marker keys: #scatter-marker
-                    color: 'rgb(100, 32, 77)' // more about "marker.color": #scatter-marker-color
+                    color: 'salmon' // more about "marker.color": #scatter-marker-color
                 }
             },
             {
@@ -29,7 +31,7 @@ class MyPlotly extends Component {
                 y: tempsMin,     // #scatter-y
                 name: "Min temp",
                 marker: {         // marker is an object, valid marker keys: #scatter-marker
-                    color: 'rgb(16, 32, 77)' // more about "marker.color": #scatter-marker-color
+                    color: 'skyblue' // more about "marker.color": #scatter-marker-color
                 }
             }
         ];
@@ -37,7 +39,10 @@ class MyPlotly extends Component {
         let layout = {                     // all "layout" attributes: #layout
             title: 'Weather forecast',  // more about "layout.title": #layout-title
             xaxis: {                  // all "layout.xaxis" attributes: #layout-xaxis
-                title: 'time'         // more about "layout.xaxis.title": #layout-xaxis-title
+                title: 'Date'         // more about "layout.xaxis.title": #layout-xaxis-title
+            },
+            yaxis:{
+                title: "Temperature (C)"
             }
         };
 

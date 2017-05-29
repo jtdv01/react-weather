@@ -1,4 +1,3 @@
-import { GOOGLE_API_KEY, PROXY_API_PORT } from '../apiKeys';
 import $ from 'jquery';
 
 export const FETCH_WEATHER = 'FETCH_WEATHER';
@@ -7,9 +6,29 @@ export const fetchWeather= (weatherData) => {
 }
 
 
-export const fetchWeatherAsync = (city) => {
+export const fetchWeatherAsyncWithYahoo = (city) => {
     return (dispatch) => {
-        /*Google Geocoding */
+        const query = encodeURIComponent(`select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${city}") and u='c'`);
+        const url = `https://query.yahooapis.com/v1/public/yql?q=${query}&format=json`;
+        fetch(url)
+            .then(data => data.json())
+            .then(data => {
+                if(data['query']['results'] === null || data['query']['results'] === undefined){
+                    // Don't do anything, dont change the state when query didnt work
+                }
+                else{
+                    dispatch(fetchWeather(data));
+                }
+            })
+
+    }
+}
+
+/*
+Google Geocoding
+// import { GOOGLE_API_KEY, PROXY_API_PORT } from '../apiKeys';
+export const fetchWeatherAsyncWithGoogle = (city) => {
+    return (dispatch) => {
         const googleGeocode= `https://maps.googleapis.com/maps/api/geocode/json?key=${GOOGLE_API_KEY}&address=${city}`;
         fetch(googleGeocode)
             .then( data => data.json())
@@ -33,6 +52,7 @@ export const fetchWeatherAsync = (city) => {
 
     }
 }
+*/
 
 export const SET_CITY = 'SET_CITY';
 export const setCity= (city) => {
