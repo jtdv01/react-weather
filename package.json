@@ -2,6 +2,7 @@
   "name": "react-weather-2",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://jtdv01.github.io/react-weather",
   "dependencies": {
     "babel-cli": "^6.24.1",
     "babel-preset-es2015": "^6.24.1",
@@ -9,6 +10,7 @@
     "bootstrap": "^3.3.7",
     "express": "^4.15.3",
     "firebase": "^4.0.0",
+    "gh-pages": "^1.0.0",
     "jquery": "^3.2.1",
     "material-ui": "^0.18.1",
     "moment": "^2.18.1",
@@ -69,6 +71,7 @@
     "start": "node scripts/start.js",
     "api": "./node_modules/.bin/babel-node src/api.js",
     "build": "node scripts/build.js",
+    "deploy":"npm run build && gh-pages -d build/",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
